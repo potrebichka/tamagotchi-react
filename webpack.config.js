@@ -63,8 +63,8 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
       template:'template.ejs',
-      appMountId: 'tamagotchi-react',
-      title: 'Tamagotchi',
+      appMountId: 'react-app-root',
+      title: 'React Help Queue',
       filename: resolve(__dirname, "build", "index.html"),
     }),
   ]

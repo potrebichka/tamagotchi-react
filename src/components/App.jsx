@@ -1,15 +1,14 @@
 import React from 'react';
-import Header from './Header';
 import Error404 from './Error404';
 import { Switch, Route } from 'react-router-dom';
-import Moment from 'moment';
+import GameControl from './GameControl';
 
-function App (){
+function App() {
   return (
     <div>
-      <Header/>
+      <h1>Welcome to Tamagotchi Game!</h1>
       <Switch>
-        <Route exact path='/' component={Game} />
+        <Route exact path='/' component={GameControl} />
         <Route component={Error404} />
       </Switch>
     </div>
