@@ -14,6 +14,8 @@ class Game extends React.Component {
     };
     this.handleSleep = this.handleSleep.bind(this);
     this.handleClean = this.handleClean.bind(this);
+    this.handleFeedMeal = this.handleFeedMeal.bind(this);
+    this.handleFeedSnack = this.handleFeedSnack.bind(this);
   }
 
   componentDidMount() {
@@ -37,12 +39,12 @@ class Game extends React.Component {
       waste: this.state.waste+1,
       energy: this.state.energy > 0 ? this.state.energy-1 : 0,
       age: this.state.age+2,
-      happinness: this.state.happiness > 250 ? this.state.happiness-1 : this.state.happiness
+      happiness: this.state.happiness > 250 ? this.state.happiness-1 : this.state.happiness
     });
     if (this.state.hungry >= 512 || this.state.age >= 8192) {
-        this.setState({alive: false});
-        clearInterval(this.doCycleTimer);
-        clearInterval(this.doRandoTimer);
+      this.setState({alive: false});
+      clearInterval(this.doCycleTimer);
+      clearInterval(this.doRandoTimer);
     }
   }
 
@@ -73,12 +75,20 @@ class Game extends React.Component {
   }
 
   handleSleep() {
-      this.state.alive ? this.setState({energy: 256}) : null;
+    this.state.alive ? this.setState({energy: 256}) : null;
   }
 
   handleClean() {
     this.state.alive ? this.setState({waste: 0}) : null;
-}
+  }
+
+  handleFeedMeal() {
+    this.state.alive ? this.setState({hungry: 0}) : null;
+  }
+
+  handleFeedSnack() {
+    this.state.alive ? this.setState({hungry: this.state.hungry <= 256 ? 0: this.state.hungry -256}) : null;
+  }
 
   componentWillUnmount() {
     clearInterval(this.doCycleTimer);
@@ -87,25 +97,25 @@ class Game extends React.Component {
 
   render() {
     let age = 'dead';
-    if (this.state.age <= 128){
+    if (this.state.age < 128){
       age = 'newborn';
-    } else if (this.state.age <= 796) {
+    } else if (this.state.age < 796) {
       age = 'hatch';
-    } else if (this.state.age <= 8192) {
-        age = 'mature';
-      } else {
+    } else if (this.state.age < 8192) {
+      age = 'mature';
+    } else {
       age = 'dead because of natural cases';
     }
 
     let eat = '';
-    if (this.state.hungry <= 32) {
-        eat = 'is full';
-      } 
-    if (this.state.hungry <= 128) {
+    if (this.state.hungry < 32) {
+      eat = 'is full';
+    } 
+    if (this.state.hungry < 128) {
       eat = 'can eat';
-    } else if (this.state.hungry <= 256) {
+    } else if (this.state.hungry < 256) {
       eat = 'needs to eat';
-    } else if (this.state.hungry<= 512) {
+    } else if (this.state.hungry< 512) {
       eat = 'is sick from not eating';
     } else {
       eat = 'is dead from not eating';
@@ -113,13 +123,13 @@ class Game extends React.Component {
 
     let energy = '';
     if (this.state.energy >= 150) {
-        energy = "is full of energy";
+      energy = 'is full of energy';
     } else if (this.state.energy >= 64) {
-        energy = "can sleep";
+      energy = 'can sleep';
     } else if (this.state.energy >= 8) {
-        energy = "tired";
+      energy = 'tired';
     } else {
-        energy = "passed out";
+      energy = 'passed out';
     }
     
     return (
@@ -134,6 +144,8 @@ class Game extends React.Component {
           <div>
             <button onClick={this.handleSleep}>Sleep</button>
             <button onClick={this.handleClean}>Clean</button>
+            <button onClick={this.handleFeedMeal}>Feed a meal</button>
+            <button onClick={this.handleFeedSnack}>Feed a snack</button>
             <hr />
             <h2>Health Meter:</h2>
             <h3>Hungry level: {this.state.hungry}</h3>

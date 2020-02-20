@@ -1,5 +1,5 @@
 {
-  "name": "cat-forum",
+  "name": "tamagotchi-react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/potrebichka/cat-forum.git"
+    "url": "git+https://github.com/potrebichka/tamagotchi-react.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/potrebichka/cat-forum/issues"
   },
-  "homepage": "https://github.com/potrebichka/cat-forum#readme",
+  "homepage": "https://github.com/potrebichka/tamagotchi-react#readme",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
